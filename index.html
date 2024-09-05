@@ -16,17 +16,32 @@
       overflow-x: hidden;
     }
     #sidebar {
-      min-width: 250px;
-      background-color: #343a40;
-      color: #fff;
-    }
-    #sidebar .nav-link {
-      color: #fff;
-    }
-    #content {
-      flex-grow: 1;
-      padding: 20px;
-    }
+    min-width: 250px;
+    max-width: 250px;
+    background-color: #343a40;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  #sidebar.collapsed {
+    min-width: 0;
+    max-width: 0;
+    overflow: hidden;
+  }
+
+  #sidebar .nav-link {
+    color: #fff;
+  }
+
+  #content {
+    flex-grow: 1;
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+
+  #content.full-width {
+    margin-left: 0;
+  }
   </style>
 </head>
 <body>
@@ -50,11 +65,31 @@
       </ul>
     </div>
   </nav>
-
   <!-- Main content -->
   <div id="content">
+    <!--Filtering-->
+    <div class="row m-4">
+        <div class="col-md-4">
+        <label for="dateRange" class="form-label">Select Date Range</label>
+        <input type="date" id="startDate" class="form-control" placeholder="Start Date">
+        </div>
+        <div class="col-md-4">
+        <label for="dateRange" class="form-label">End Date</label>
+        <input type="date" id="endDate" class="form-control" placeholder="End Date">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+        <button class="btn btn-primary" onclick="filterData()">Filter</button>
+        </div>
+    </div>    
+    <!--Notifications-->  
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>New Order Received!</strong> Order ID #ORD1236.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      
     <!-- Top navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light m-4 rounded-2">
+      <button class="btn btn-primary" id="sidebarToggle">Toggle Sidebar</button>
       <a class="navbar-brand m-2" href="#">Admin Dashboard</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
@@ -110,10 +145,23 @@
             </div>
             </div>
         </div>
+          
         <!-- Orders Table -->
         <div class="col-12">
             <div class="card mb-4">
             <div class="card-header">Recent Orders</div>
+            <!--Dropdown Filter-->
+            <div class="dropdown ms-4 mt-4">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="statusDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter by Status
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                  <li><a class="dropdown-item" href="#">All</a></li>
+                  <li><a class="dropdown-item" href="#">Shipped</a></li>
+                  <li><a class="dropdown-item" href="#">Pending</a></li>
+                  <li><a class="dropdown-item" href="#">Cancelled</a></li>
+                </ul>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-striped table-hover">
@@ -149,7 +197,32 @@
                         <td>$90.00</td>
                         <td><span class="badge bg-warning">Pending</span></td>
                         <td>
-                        <button class="btn btn-sm btn-primary">View</button>
+                        <!-- Modal Trigger (inside the Actions button) -->
+                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal">View</button>
+
+                        <!-- Order Modal -->
+                        <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Order details can go here -->
+                                <p><strong>Order ID:</strong> ORD1236</p>
+                                <p><strong>Customer:</strong> Jane Smith</p>
+                                <p><strong>Total:</strong> $200.00</p>
+                                <p><strong>Status:</strong> Shipped</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Edit Order</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
                         <button class="btn btn-sm btn-warning">Edit</button>
                         </td>
                     </tr>
@@ -187,6 +260,7 @@
                 <td>$600.00</td>
                 <td>150</td>
                 <td>
+                  
                   <button class="btn btn-sm btn-primary">View</button>
                   <button class="btn btn-sm btn-warning">Edit</button>
                 </td>
@@ -264,5 +338,27 @@
       }
     });
   </script>  
+  <!--Filtering Script-->
+  <script>
+    function filterData() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      if (startDate && endDate) {
+        alert(`Filtering data from ${startDate} to ${endDate}`);
+        // Add logic to filter chart/table data by date range here
+      } else {
+        alert("Please select both start and end dates");
+      }
+    }
+  </script> 
+  <!--Toggle Sidebar-->
+  <script>
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+      document.getElementById('sidebar').classList.toggle('collapsed');
+      document.getElementById('content').classList.toggle('full-width');
+    });
+  </script>
+  
 </body>
 </html>
