@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .auth-container {
+        display: flex;
+        height: 100vh;
+        justify-content: flex-start;
+        align-items: center;
+      }
+      .auth-form {
+        width: 300px;
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Register Form -->
+    <div class="auth-container">
+      <div class="auth-form">
+        <h3>Register</h3>
+        <div id="alert-placeholder"></div>
+
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="name" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              required
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="handleRegister()"
+          >
+            Register
+          </button>
+          <p class="m-2">Already have an account? Login <a href="login.html">here</a></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Register Script -->
+    <script>
+      function handleRegister() {
+        // Simulate successful registration
+        showAlert("Registration successful! Please log in.", "success");
+      }
+
+      function showAlert(message, type) {
+        const alertPlaceholder = document.getElementById("alert-placeholder");
+        alertPlaceholder.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      }
+    </script>
+  </body>
+</html>
