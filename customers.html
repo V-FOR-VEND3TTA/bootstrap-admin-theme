@@ -1,75 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customers - E-commerce Dashboard</title>
-  <!--Bootstrap CSS-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!--FA6-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!--Styling-->
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <!-- Sidebar -->
-  <nav id="sidebar" class="bg-dark">
-    <div class="p-4">
-      <h4 class="m-2">E-commerce Admin</h4>
-      <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="orders.html">Orders</a></li>
-        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-        <li class="nav-item"><a class="nav-link active" href="customers.html">Customers</a></li>
-        <li class="nav-item"><a class="nav-link" href="notifications.html">Notifications</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <div id="content">
-    <!--Toggle Menu-->
-    <button class="btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand ms-3" href="#">Customers</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers - E-commerce Dashboard</title>
+    <!--Bootstrap CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!--FA6-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--Styling-->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-dark">
+      <div class="p-4">
+        <h4 class="m-2">E-commerce Admin</h4>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="orders.html">Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="customers.html">Customers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="notifications.html">Notifications</a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
-    <!-- Customers Table -->
-    <div class="container-fluid mt-4">
-      <h3>Customers</h3>
-      <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Customer ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Location</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>CUS1234</td>
-              <td>John Doe</td>
-              <td>john@example.com</td>
-              <td>New York, USA</td>
-              <td>
-                <button class="btn btn-sm btn-primary mb-2">View</button>
-                <button class="btn btn-sm btn-warning mb-2">Edit</button>
-              </td>
-            </tr>
-            <!-- More rows can go here -->
-          </tbody>
-        </table>
+    <!-- Main Content -->
+    <div id="content">
+      <!--Toggle Menu-->
+      <button class="btn" id="sidebarToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand ms-3" href="#">Customers</a>
+      </nav>
+
+      <div class="container text-center my-4">
+        <svg width="200px" height="200px" viewBox="0 0 1024 1024" class="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M841.2 841.1H182.9V182.9h292.5v-73.2H109.7v804.6h804.6V621.7h-73.1z" fill="#0F1F3C" /><path d="M402.3 585.1h73.1c0-100.8 82-182.9 182.9-182.9s182.9 82 182.9 182.9h73.1c0-102.2-60.2-190.6-147-231.6 23.2-25.9 37.3-60.1 37.3-97.5 0-80.8-65.5-146.3-146.3-146.3-80.8 0-146.3 65.5-146.3 146.3 0 37.5 14.1 71.7 37.3 97.5-86.8 41.1-147 129.4-147 231.6z m256-402.2c40.3 0 73.1 32.8 73.1 73.1s-32.8 73.1-73.1 73.1-73.1-32.8-73.1-73.1 32.8-73.1 73.1-73.1zM219.4 256h219.4v73.1H219.4zM219.4 658.3h585.1v73.1H219.4zM219.4 402.3h146.3v73.1H219.4z" fill="#0F1F3C" /></svg>
+      </div>
+
+      <!-- Customers Table -->
+      <div class="container-fluid mt-4">
+        <h3>Customers</h3>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>CUS1234</td>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>New York, USA</td>
+                <td>
+                  <button class="btn btn-sm btn-primary mb-2">View</button>
+                  <button class="btn btn-sm btn-warning mb-2">Edit</button>
+                </td>
+              </tr>
+              <!-- More rows can go here -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-  <!--Bootstrap JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <!--Custom JS Script-->
-  <script src="js/scripts.js"></script>
-</body>
+    <!--Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--Custom JS Script-->
+    <script src="js/scripts.js"></script>
+  </body>
 </html>
