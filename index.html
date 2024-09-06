@@ -13,48 +13,92 @@
 
   <!--Styling-->
   <style>
-    body {
-      display: flex;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    #sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    background-color: #343a40;
-    color: #fff;
-    transition: all 0.3s ease;
+  body {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#sidebar {
+  width: 250px;
+  background-color: #343a40;
+  color: #fff;
+  position: fixed;
+  left: -250px; /* Sidebar is fully hidden off-screen */
+  top: 0;
+  height: 100%;
+  transition: all 0.3s ease;
+  z-index: 1050; /* Ensure the sidebar is on top of other content */
+}
+
+#sidebar.collapsed {
+  left: 0; /* Sidebar slides into view when opened */
+}
+
+#sidebar .nav-link {
+  color: #fff;
+}
+
+#content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: all 0.3s ease;
+  margin-left: 250px;
+}
+
+#content.full-width {
+  margin-left: 0;
+}
+
+#sidebarToggle {
+  border: none;
+  padding: 0;
+  font-size: 24px;
+  background-color: transparent;
+  position: fixed; /* Ensure toggle button is positioned correctly */
+  top: 15px;
+  left: 15px; /* Initial position on mobile */
+  z-index: 1060; /* Ensure the toggle button is above the sidebar */
+}
+
+#sidebarToggle:focus {
+  outline: none;
+}
+
+/* Mobile view styles */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 50%;
+    left: -50%; /* Sidebar is fully off-screen before toggle */
+    z-index: 1050; /* Sidebar stays above content */
   }
 
   #sidebar.collapsed {
-    min-width: 0;
-    max-width: 0;
-    overflow: hidden;
-  }
-
-  #sidebar .nav-link {
-    color: #fff;
+    left: 0; /* Sidebar slides into view when opened */
   }
 
   #content {
-    flex-grow: 1;
-    padding: 20px;
-    transition: all 0.3s ease;
+    margin-left: 0;
+    width: 100%;
+    padding: 15px;
   }
 
   #content.full-width {
     margin-left: 0;
   }
+
   #sidebarToggle {
-    border: none;
-    padding: 0;
-    font-size: 24px;
-    background-color: transparent;
+    left: 10px; /* When sidebar is closed */
+    top: 15px;
+    transition: left 0.3s ease;
   }
 
-  #sidebarToggle:focus {
-    outline: none;
+  /* Move toggle button when sidebar is open */
+  #sidebar.collapsed + #content #sidebarToggle {
+    left: calc(50% + 10px); /* Move the toggle button to the middle of the sidebar */
   }
+}
+
   </style>
 </head>
 <body>
@@ -90,72 +134,82 @@
         <input type="date" id="endDate" class="form-control" placeholder="End Date">
         </div>
         <div class="col-md-4 d-flex align-items-end">
-        <button class="btn btn-primary" onclick="filterData()">Filter</button>
+        <button class="btn btn-primary mt-2" onclick="filterData()">Filter</button>
         </div>
     </div>    
     <!--Notifications-->  
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>New Order Received!</strong> Order ID #ORD1236.
+        <strong><a href="notifications.html" style="text-decoration: none; text-decoration-color: none;">New Order Received!</a></strong> Order ID #ORD1236.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       
     <!-- Top navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light m-4 rounded-2">
-      <a class="navbar-brand m-2" href="#">Admin Dashboard</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="notifications.html">Notifications <i class="fa-solid fa-bell"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <a class="navbar-brand m-2" href="#">Admin Dashboard</a>
+      
+        <!-- Toggler button for small screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="notifications.html">Notifications <i class="fa-solid fa-bell"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
 
     <!-- Dashboard content -->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="card bg-primary text-white mb-4">
             <div class="card-body text-center"><b>Total Sales</b></div>
             <div class="text-center mb-2">1, 234</div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="card bg-success text-white mb-4">
             <div class="card-body text-center"><b>Orders</b></div>
             <div class="text-center mb-2">1, 234</div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="card bg-danger text-white mb-4">
             <div class="card-body text-center"><b>Revenue</b></div>
             <div class="text-center mb-2">$ 54, 234</div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="card bg-warning text-white mb-4">
             <div class="card-body text-center"><b>Customers</b></div>
             <div class="text-center mb-2">734</div>
           </div>
         </div>
         <!-- Sales Chart -->
-        <div class="col-md-6">
-            <div class="card mb-4">
-            <div class="card-header">Sales Overview</div>
-            <div class="card-body">
-                <canvas id="salesChart"></canvas>
-            </div>
-            </div>
-        </div>
-        <!-- Revenue Chart -->
-        <div class="col-md-6">
-            <div class="card mb-4">
-            <div class="card-header">Revenue Overview</div>
-            <div class="card-body">
-                <canvas id="revenueChart"></canvas>
-            </div>
-            </div>
-        </div>
+<div class="col-md-6 col-sm-12">
+    <div class="card mb-4">
+      <div class="card-header">Sales Overview</div>
+      <div class="card-body">
+        <canvas id="salesChart"></canvas>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Revenue Chart -->
+  <div class="col-md-6 col-sm-12">
+    <div class="card mb-4">
+      <div class="card-header">Revenue Overview</div>
+      <div class="card-body">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+  </div>
+  
           
         <!-- Orders Table -->
         <div class="col-12">
@@ -196,8 +250,8 @@
                         <td>$120.00</td>
                         <td><span class="badge bg-success">Shipped</span></td>
                         <td>
-                        <button class="btn btn-sm btn-primary">View</button>
-                        <button class="btn btn-sm btn-warning">Edit</button>
+                        <button class="btn btn-sm btn-primary mb-2">View</button>
+                        <button class="btn btn-sm btn-warning mb-2">Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -209,7 +263,7 @@
                         <td><span class="badge bg-warning">Pending</span></td>
                         <td>
                         <!-- Modal Trigger (inside the Actions button) -->
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal">View</button>
+                        <button type="button" class="btn btn-sm btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#orderModal">View</button>
 
                         <!-- Order Modal -->
                         <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
@@ -234,7 +288,7 @@
                         </div>
                         </div>
 
-                        <button class="btn btn-sm btn-warning">Edit</button>
+                        <button class="btn btn-sm btn-warning mb-2">Edit</button>
                         </td>
                     </tr>
                     <!-- Add more rows as needed -->
@@ -272,8 +326,8 @@
                 <td>150</td>
                 <td>
                   
-                  <button class="btn btn-sm btn-primary">View</button>
-                  <button class="btn btn-sm btn-warning">Edit</button>
+                  <button class="btn btn-sm btn-primary mb-2">View</button>
+                  <button class="btn btn-sm btn-warning mb-2">Edit</button>
                 </td>
               </tr>
               <tr>
@@ -284,8 +338,8 @@
                 <td>$120.00</td>
                 <td>50</td>
                 <td>
-                  <button class="btn btn-sm btn-primary">View</button>
-                  <button class="btn btn-sm btn-warning">Edit</button>
+                  <button class="btn btn-sm btn-primary mb-2">View</button>
+                  <button class="btn btn-sm btn-warning mb-2">Edit</button>
                 </td>
               </tr>
             </tbody>
@@ -316,7 +370,8 @@
         }]
       },
       options: {
-        responsive: true,
+        responsive: true,  // Ensure responsive behavior
+        maintainAspectRatio: false, // Let the chart adapt to different aspect ratios
         scales: {
           y: {
             beginAtZero: true
@@ -340,7 +395,8 @@
         }]
       },
       options: {
-        responsive: true,
+        responsive: true, // Ensure responsive behaviour
+        maintainAspectRatio: false, // Let the chart adapt to different aspect ratios
         scales: {
           y: {
             beginAtZero: true
@@ -363,25 +419,27 @@
       }
     }
   </script> 
-  <!--Toggle Sidebar-->
   <!--Toggle between icons-->
   <script>
     document.getElementById('sidebarToggle').addEventListener('click', function () {
-      // Toggle sidebar collapsed state
-      document.getElementById('sidebar').classList.toggle('collapsed');
-      document.getElementById('content').classList.toggle('full-width');
+      const sidebar = document.getElementById('sidebar');
+      const content = document.getElementById('content');
+      const icon = document.querySelector('#sidebarToggle i');
+  
+      // Toggle collapsed class
+      sidebar.classList.toggle('collapsed');
+      content.classList.toggle('full-width');
   
       // Toggle icon between bars and X
-      const icon = document.querySelector('#sidebarToggle i');
-      if (document.getElementById('sidebar').classList.contains('collapsed')) {
-        icon.classList.remove('fa-xmark'); // X icon class
-        icon.classList.add('fa-bars');     // Hamburger icon class
+      if (sidebar.classList.contains('collapsed')) {
+        icon.classList.remove('fa-bars'); // X icon class
+        icon.classList.add('fa-xmark');     // Hamburger icon class
       } else {
-        icon.classList.remove('fa-bars');  // Hamburger icon class
-        icon.classList.add('fa-xmark');    // X icon class
+        icon.classList.remove('fa-xmark');  // Hamburger icon class
+        icon.classList.add('fa-bars');    // X icon class
       }
     });
-  </script>
+  </script>   
   <footer class="text-center">Company &copy; 2024 | All Rights Reserved.</footer>
 </body>
 </html>
