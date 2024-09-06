@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <style>
+      .auth-container {
+        display: flex;
+        height: 100vh;
+        justify-content: flex-start; /* Align content to the left */
+        align-items: center;
+      }
+      .auth-form {
+        width: 300px;
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login Form -->
+    <div class="auth-container">
+      <div class="auth-form">
+        <h3>Login</h3>
+        <div id="alert-placeholder"></div>
+        <!-- Alert placeholder -->
+
+        <form>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              required
+            />
+          </div>
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="rememberMe"
+            />
+            <label class="form-check-label" for="rememberMe">Remember Me</label>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="handleLogin()">
+            Login
+          </button>
+          <a href="forgot-password.html" class="d-block mt-2"
+            >Forgot Password?</a
+          >
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Login Script -->
+    <script>
+      function handleLogin() {
+        // Simulate successful login process
+        const rememberMe = document.getElementById("rememberMe").checked;
+
+        if (rememberMe) {
+          // Show Bootstrap alert when "Remember Me" is checked
+          showAlert("Info saved successfully", "success");
+        }
+      }
+
+      function showAlert(message, type) {
+        const alertPlaceholder = document.getElementById("alert-placeholder");
+        alertPlaceholder.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      }
+    </script>
+  </body>
+</html>
